@@ -1,148 +1,99 @@
-<script>
-const exams = [
-  {
-    id: 1,
-    title: "Deneme 1 – Vurgulu Kolay",
-    questions: [
-      {
-        q: "Örgüt içi iletişimin temel amacı nedir?",
-        options: [
-          "Denetimi artırmak",
-          "Bilgi, duygu ve anlayış paylaşımı",
-          "Hiyerarşiyi güçlendirmek",
-          "Çatışma yaratmak"
-        ],
-        answer: 1,
-        explain: "Örgüt içi iletişim bilgi ve anlayış paylaşımı içindir."
-      }
-    ]
-  },
-  {
-    id: 2,
-    title: "Deneme 2 – Vurgulu Orta",
-    questions: [
-      {
-        q: "Dikey iletişim hangi yönde gerçekleşir?",
-        options: [
-          "Aynı düzey",
-          "Üst–alt",
-          "Gayriresmi",
-          "Kişisel"
-        ],
-        answer: 1,
-        explain: "Dikey iletişim hiyerarşik iletişimdir."
-      }
-    ]
-  },
-  {
-    id: 3,
-    title: "Deneme 3 – Vurgulu Zor",
-    questions: [
-      {
-        q: "Manipülatif iletişimin amacı nedir?",
-        options: [
-          "Şeffaflık",
-          "Propaganda",
-          "Katılım",
-          "Geri bildirim"
-        ],
-        answer: 1,
-        explain: "Manipülatif iletişim propaganda amaçlıdır."
-      }
-    ]
-  },
-  {
-    id: 4,
-    title: "Deneme 4 – Vurgulu Çok Zor",
-    questions: [
-      {
-        q: "Yüksek bağlamlı kültürlerin özelliği nedir?",
-        options: [
-          "Açık sözlülük",
-          "Sözsüz iletişim",
-          "Bireysellik",
-          "Netlik"
-        ],
-        answer: 1,
-        explain: "Yüksek bağlamlı kültürlerde sözsüz iletişim güçlüdür."
-      }
-    ]
-  },
-  {
-    id: 5,
-    title: "Deneme 5 – Vurgusuz Kolay",
-    questions: [
-      {
-        q: "Kitle iletişiminde alıcılar nasıldır?",
-        options: [
-          "Homojen",
-          "Anonim",
-          "Tanıdık",
-          "Az"
-        ],
-        answer: 1,
-        explain: "Kitle iletişiminde alıcılar anonimdir."
-      }
-    ]
-  },
-  {
-    id: 6,
-    title: "Deneme 6 – Vurgusuz Orta",
-    questions: [
-      {
-        q: "Web 2.0’ın temel özelliği nedir?",
-        options: [
-          "Pasif kullanıcı",
-          "Etkileşim",
-          "Sansür",
-          "Yavaşlık"
-        ],
-        answer: 1,
-        explain: "Web 2.0 etkileşimlidir."
-      }
-    ]
-  },
-  {
-    id: 7,
-    title: "Deneme 7 – Vurgusuz Zor",
-    questions: [
-      {
-        q: "Z kuşağı hangi adla anılır?",
-        options: [
-          "Dijital göçmen",
-          "Dijital yerli",
-          "Analog",
-          "Geleneksel"
-        ],
-        answer: 1,
-        explain: "Z kuşağı dijital yerlidir."
-      }
-    ]
-  }
-];
+{
+  "tests": [
+    {
+      "id": 1,
+      "title": "Test 1 – Vurgulu Kolay",
+      "questions": [
+        {"question":"Örgüt içi iletişimin temel amacı nedir?","options":["Denetimi artırmak","Bilgi, duygu ve anlayış paylaşımı","Hiyerarşiyi güçlendirmek","Çatışma yaratmak"],"answer":1},
+        {"question":"Çalışanlar örgütün yönünü öğrenmek ister mi?","options":["Hayır","Evet","Bazen","Hiçbiri"],"answer":1},
+        {"question":"Dikey iletişim kimler arasında gerçekleşir?","options":["Üst–alt","Aynı düzey","Çapraz","Bireysel"],"answer":0},
+        {"question":"İnformal iletişim nedir?","options":["Planlı","Resmi","Gayriresmi","Yazılı"],"answer":2},
+        {"question":"Manipülatif iletişim neyi amaçlar?","options":["Açıklık","Propaganda","Katılım","Geri bildirim"],"answer":1},
+        {"question":"Yatay iletişim kimler arasında olur?","options":["Üst–alt","Aynı statü","Yönetici–çalışan","Kurum–kamu"],"answer":1},
+        {"question":"Dedikodu hangi iletişim türüdür?","options":["Formal","Dikey","İnformal","Çapraz"],"answer":2},
+        {"question":"Geri bildirim hangi modelle eklenmiştir?","options":["Lasswell","DeFleur","Shannon–Weaver","Dance"],"answer":1},
+        {"question":"Dance’in Sarmal Modeli neyi gösterir?","options":["Doğrusal iletişim","Zamanla gelişim","Gürültü etkisi","Pasif alıcı"],"answer":1},
+        {"question":"Kitle iletişiminde alıcılar nasıldır?","options":["Homojen","Anonim","Tanıdık","Küçük grup"],"answer":1},
+        {"question":"Takvim-i Vekayi ne zaman yayımlandı?","options":["1831","1828","1840","1850"],"answer":0},
+        {"question":"Radyo babası kimdir?","options":["Hertz","Bell","Marconi","Edison"],"answer":2},
+        {"question":"TRT Türkiye’de ilk TV yayını yaptı mı?","options":["Evet","Hayır","Bazen","İTÜ yaptı"],"answer":3},
+        {"question":"Yeni medyanın farkı nedir?","options":["Tek yönlülük","Etkileşim","Yavaşlık","Sansür"],"answer":1},
+        {"question":"Web 1.0 kullanıcısı nasıldır?","options":["Pasif","Etkileşimli","Sosyal","Üretken"],"answer":0},
+        {"question":"Web 2.0’ın özelliği nedir?","options":["Sansür","İçerik üretimi","Okuma","Yavaşlık"],"answer":1},
+        {"question":"Blog gazeteciliği nedir?","options":["Kurumsal","Kişisel","TV haberciliği","Radyo"],"answer":1},
+        {"question":"Podcast gazeteciliğinin avantajı nedir?","options":["Canlılık","Zaman kısıtı","İstenilen zamanda dinleme","Yazılı olması"],"answer":2},
+        {"question":"RTÜK neyi denetler?","options":["BTK","MEB","YÖK","Yayıncılık"],"answer":3},
+        {"question":"Z kuşağı hangi adla anılır?","options":["Dijital göçmen","Dijital yerli","Analog","Geleneksel"],"answer":1},
+        {"question":"Eşzamansız iletişim örneği nedir?","options":["Chat","Canlı yayın","E-posta","Web konferansı"],"answer":2},
+        {"question":"Etnosentrizm nedir?","options":["Kültürel hassasiyet","Kendi kültürünü üstün görme","Uyum","Bilgi"],"answer":1},
+        {"question":"Atfedilmiş kimlik nedir?","options":["Kendi seçtiği","Başkalarının verdiği","Mesleki","Dijital"],"answer":1},
+        {"question":"Kültür şokunun ilk aşaması nedir?","options":["Kriz","Uyum","Balayı","Toparlanma"],"answer":2},
+        {"question":"Yüksek bağlamlı kültürlerin özelliği nedir?","options":["Açık iletişim","Sözsüz iletişim","Bireysellik","Kısa ilişkiler"],"answer":1}
+      ]
+    },
 
-const quizForm = document.getElementById("quiz");
+    {
+      "id": 2,
+      "title": "Test 2 – Vurgulu Orta",
+      "questions": [
+        {"question":"Lasswell modeli hangi türdür?","options":["Dairesel","Doğrusal","Sarmal","Etkileşimli"],"answer":1},
+        {"question":"Shannon–Weaver modeli neyi ekledi?","options":["Kanal","Gürültü","Alıcı","Kaynak"],"answer":1},
+        {"question":"DeFleur modeli neyi öne çıkarır?","options":["Geri bildirim","Propaganda","Tek yönlülük","İnformal"],"answer":0},
+        {"question":"Dance modeli hangi özelliği vurgular?","options":["Dairesel","Zamanla gelişim","Pasif alıcı","Hiyerarşi"],"answer":1},
+        {"question":"Örgüt içi iletişim motivasyonu nasıl etkiler?","options":["Artırır","Azaltır","Etkilemez","Engeller"],"answer":0},
+        {"question":"Empati iletişimde ne sağlar?","options":["Çatışma","Anlayış","Güvensizlik","Denetim"],"answer":1},
+        {"question":"Geri bildirim eksikliği neyi yaratır?","options":["İletişim kopukluğu","Etkinlik","Verimlilik","Uyum"],"answer":0},
+        {"question":"Bürokratik iletişimde bilgi nasıldır?","options":["Serbest","Sınırlı","Yoğun","Düzensiz"],"answer":1},
+        {"question":"Orantısız iletişim ne demektir?","options":["Tam açıklık","Eksik bilgi","Serbest iletişim","Çift yönlülük"],"answer":1},
+        {"question":"Açık sistem anlayışı neyi savunur?","options":["Dışa kapalı","Çevreyle etkileşim","Sabit yapı","Değişmezlik"],"answer":1},
+        {"question":"Örgütsel bağlılık neyle artar?","options":["Bilgi gizleme","Etkili iletişim","Denetim","Ceza"],"answer":1},
+        {"question":"İletişim sürecinde mesaj nedir?","options":["Anlam","İleti","Kanal","Tepki"],"answer":1},
+        {"question":"İletişimde kodlama ne demektir?","options":["Mesajı çözme","Mesajı oluşturma","Mesajı silme","Mesajı gizleme"],"answer":1},
+        {"question":"Kitle iletişiminde alıcılar nasıldır?","options":["Homojen","Anonim","Tanıdık","Küçük"],"answer":1},
+        {"question":"Takvim-i Vekayi ne zaman yayımlandı?","options":["1831","1828","1840","1850"],"answer":0},
+        {"question":"Radyo babası kimdir?","options":["Hertz","Bell","Marconi","Edison"],"answer":2},
+        {"question":"TRT Türkiye’de ilk TV yayını yaptı mı?","options":["Evet","Hayır","Bazen","İTÜ yaptı"],"answer":3},
+        {"question":"Yeni medyanın farkı nedir?","options":["Tek yönlülük","Etkileşim","Yavaşlık","Sansür"],"answer":1},
+        {"question":"Web 1.0 kullanıcısı nasıldır?","options":["Pasif","Etkileşimli","Sosyal","Üretken"],"answer":0},
+        {"question":"Web 2.0’ın özelliği nedir?","options":["Sansür","İçerik üretimi","Okuma","Yavaşlık"],"answer":1},
+        {"question":"Blog gazeteciliği nedir?","options":["Kurumsal","Kişisel","TV haberciliği","Radyo"],"answer":1},
+        {"question":"Podcast gazeteciliğinin avantajı nedir?","options":["Canlılık","Zaman kısıtı","İstenilen zamanda dinleme","Yazılı olması"],"answer":2},
+        {"question":"RTÜK neyi denetler?","options":["BTK","MEB","YÖK","Yayıncılık"],"answer":3},
+        {"question":"Eşzamansız iletişim örneği nedir?","options":["Chat","Canlı yayın","E-posta","Web konferansı"],"answer":2},
+        {"question":"Etnosentrizm nedir?","options":["Kültürel hassasiyet","Kendi kültürünü üstün görme","Uyum","Bilgi"],"answer":1}
+      ]
+    },
 
-function loadExam() {
-  quizForm.innerHTML = "";
-  const examIndex = document.getElementById("examSelect").value;
-  const exam = exams[examIndex];
-
-  exam.questions.forEach((item, index) => {
-    const div = document.createElement("div");
-    div.className = "question";
-    div.innerHTML = `
-      <p>${index + 1}) ${item.q}</p>
-      ${item.options
-        .map(
-          (opt, i) =>
-            `<label><input type="radio" name="q${index}" value="${i}"> ${opt}</label><br>`
-        )
-        .join("")}
-    `;
-    quizForm.appendChild(div);
-  });
+    {
+      "id": 3,
+      "title": "Test 3 – Vurgulu Zor",
+      "questions": [
+        {"question":"Dance Sarmal Modeli neyi vurgular?","options":["Tek yön","Zamanla gelişim","Gürültü","Kontrol"],"answer":1},
+        {"question":"Yüksek bağlamlı kültürlerde iletişim nasıldır?","options":["Açık","Sözsüz güçlü","Bireysel","Net"],"answer":1},
+        {"question":"Atfedilmiş kimlik nedir?","options":["Kendi seçtiği","Başkalarının verdiği","Mesleki","Dijital"],"answer":1},
+        {"question":"İletişim başarısı neye bağlıdır?","options":["Tek yön","Anlamın paylaşılması","Gürültü","Hız"],"answer":1},
+        {"question":"Örgütsel iletişim hangi düzeyde olur?","options":["Sadece bireysel","Bireysel ve grup","Sadece yönetim","Sadece yazılı"],"answer":1},
+        {"question":"Örgüt içi iletişim karar sürecini nasıl etkiler?","options":["Zayıflatır","Güçlendirir","Yavaşlatır","Engeller"],"answer":1},
+        {"question":"İletişimde empati ne sağlar?","options":["Çatışma","Anlayış","Denetim","Mesafe"],"answer":1},
+        {"question":"Kültür şokunun ilk aşaması nedir?","options":["Kriz","Uyum","Balayı","Toparlanma"],"answer":2},
+        {"question":"İletişim engellerinden biri nedir?","options":["Güvensizlik","Geri bildirim","Açıklık","Uyum"],"answer":0},
+        {"question":"Bürokratik iletişimde bilgi nasıldır?","options":["Serbest","Sınırlı","Yoğun","Düzensiz"],"answer":1},
+        {"question":"Orantısız iletişim neyi ifade eder?","options":["Tam açıklık","Geri bildirim eksikliği","Serbest iletişim","Çift yönlülük"],"answer":1},
+        {"question":"Açık sistem anlayışı neyi savunur?","options":["Dışa kapalı","Çevreyle etkileşim","Sabit yapı","Değişmezlik"],"answer":1},
+        {"question":"Örgütsel bağlılık neyle artar?","options":["Bilgi gizleme","Etkili iletişim","Denetim","Ceza"],"answer":1},
+        {"question":"Geri bildirim ne sağlar?","options":["Tek yön","Anlaşılma","Gizlilik","Hiyerarşi"],"answer":1},
+        {"question":"İletişim sürecinin ilk öğesi nedir?","options":["Kanal","Kaynak","Alıcı","Gürültü"],"answer":1},
+        {"question":"İletişim sürecinde mesaj nedir?","options":["Anlam","İleti","Kanal","Tepki"],"answer":1},
+        {"question":"İletişimde kodlama ne demektir?","options":["Mesajı çözme","Mesajı oluşturma","Mesajı silme","Mesajı gizleme"],"answer":1},
+        {"question":"Kitle iletişiminde alıcılar nasıldır?","options":["Homojen","Anonim","Tanıdık","Az"],"answer":1},
+        {"question":"Takvim-i Vekayi ne zaman yayımlandı?","options":["1831","1828","1840","1850"],"answer":0},
+        {"question":"Radyo babası kimdir?","options":["Hertz","Bell","Marconi","Edison"],"answer":2},
+        {"question":"TRT Türkiye’de ilk TV yayını yaptı mı?","options":["Evet","Hayır","Bazen","İTÜ yaptı"],"answer":3},
+        {"question":"Yeni medyanın farkı nedir?","options":["Tek yönlülük","Etkileşim","Yavaşlık","Sansür"],"answer":1},
+        {"question":"Web 1.0 kullanıcısı nasıldır?","options":["Pasif","Etkileşimli","Sosyal","Üretken"],"answer":0},
+        {"question":"Web 2.0’ın özelliği nedir?","options":["Sansür","İçerik üretimi","Okuma","Yavaşlık"],"answer":1},
+        {"question":"Blog gazeteciliği nedir?","options":["Kurumsal","Kişisel","TV haberciliği","Radyo"],"answer":1}
+      ]
+    }
+  ]
 }
-
-loadExam();
-</script>
