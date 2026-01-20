@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <title>İletişim Dersi – Online Deneme Sınavı</title>
+  <title>İletişim Dersi – 25 Soruluk Online Deneme</title>
   <style>
     body { font-family: Arial, sans-serif; background:#f4f6f8; padding:20px; }
     .container { max-width:900px; margin:auto; background:#fff; padding:20px; border-radius:8px; }
@@ -15,7 +15,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>İletişim – Online Deneme Sınavı</h1>
+    <h1>İletişim – 25 Soruluk Online Deneme Sınavı</h1>
     <form id="quiz"></form>
     <button onclick="submitQuiz()">Sınavı Bitir</button>
     <div id="result" class="result"></div>
@@ -23,62 +23,51 @@
 
 <script>
 const questions = [
-  {
-    q: "Lasswell iletişim modeli hangi tür modele örnektir?",
-    options: ["Dairesel", "Doğrusal", "Sarmal", "Etkileşimli"],
-    answer: 1,
-    explain: "Lasswell modeli doğrusal bir iletişim modelidir ve geri bildirimi içermez."
-  },
-  {
-    q: "Shannon–Weaver modelinde iletişimi bozan parazitlere ne ad verilir?",
-    options: ["Kod", "Kanal", "Gürültü", "Mesaj"],
-    answer: 2,
-    explain: "Bu modelde iletişimi bozan her türlü etken 'gürültü' olarak adlandırılır."
-  },
-  {
-    q: "Geri bildirimi iletişim sürecine ekleyen model hangisidir?",
-    options: ["Lasswell", "DeFleur", "Dance", "Newcomb"],
-    answer: 1,
-    explain: "DeFleur modeli iletişimin çift yönlü olduğunu savunur ve geri bildirimi ekler."
-  },
-  {
-    q: "İletişimin zamanla gelişerek ilerlediğini savunan model hangisidir?",
-    options: ["Doğrusal", "Matematiksel", "Sarmal", "Dairesel"],
-    answer: 2,
-    explain: "Dance’in Sarmal Modeli iletişimin zamanla geliştiğini savunur."
-  }
+  { q:"Örgüt içi iletişimin temel amacı nedir?", options:["Denetimi artırmak","Bilgi, duygu ve anlayış paylaşımı sağlamak","Hiyerarşiyi güçlendirmek","Çatışma yaratmak"], answer:1, explain:"Örgüt içi iletişim, kurum içinde bilgi ve anlayış paylaşımını sağlar."},
+  { q:"Çalışanların en çok merak ettiği sorulardan biri hangisidir?", options:["Rakipler kim?","Örgüt ne yöne gidiyor?","Kâr oranı nedir?","Yönetici kim?"], answer:1, explain:"Çalışanlar örgütün yönünü ve hedeflerini bilmek ister."},
+  { q:"Manipülatif iletişimin temel amacı nedir?", options:["Açıklık","Propaganda","Geri bildirim","İş birliği"], answer:1, explain:"Manipülatif iletişimde bilgi seçilidir ve propaganda amaçlanır."},
+  { q:"Üstten alta ve alttan üste iletişim hangi türdür?", options:["Yatay","Çapraz","Dikey","İnformal"], answer:2, explain:"Dikey iletişim hiyerarşik yönde gerçekleşir."},
+  { q:"Dedikodu ve söylenti hangi iletişim türüdür?", options:["Formal","Dikey","İnformal","Çapraz"], answer:2, explain:"İnformal iletişim planlanmamış, söylenti temellidir."},
+  { q:"Lasswell modeli hangi türdür?", options:["Dairesel","Doğrusal","Sarmal","Etkileşimli"], answer:1, explain:"Lasswell modeli doğrusal bir modeldir."},
+  { q:"Gürültü kavramını modele ekleyen kimdir?", options:["Lasswell","DeFleur","Shannon–Weaver","Schramm"], answer:2, explain:"Shannon–Weaver modeli gürültü kavramını içerir."},
+  { q:"Geri bildirimi ekleyen model hangisidir?", options:["Lasswell","DeFleur","Dance","Newcomb"], answer:1, explain:"DeFleur modeli iletişimi çift yönlü ele alır."},
+  { q:"İletişimin zamanla geliştiğini savunan model?", options:["Dairesel","Matematiksel","Sarmal","Doğrusal"], answer:2, explain:"Dance’in Sarmal Modeli gelişimi vurgular."},
+  { q:"Kitle iletişiminde alıcılar nasıldır?", options:["Homojen","Anonim","Tanıdık","Küçük"], answer:1, explain:"Kitle iletişiminde alıcılar anonimdir."},
+  { q:"Osmanlı’da ilk resmi Türkçe gazete hangisidir?", options:["Hürriyet","Takvim-i Vekayi","Sabah","Tercüman-ı Ahval"], answer:1, explain:"Takvim-i Vekayi 1831’de yayımlanmıştır."},
+  { q:"Radyonun babası kimdir?", options:["Hertz","Bell","Marconi","Edison"], answer:2, explain:"Marconi ilk kontrollü radyo sinyalini göndermiştir."},
+  { q:"Türkiye’de ilk TV deneme yayını kim yaptı?", options:["TRT","BBC","İTÜ","CNN"], answer:2, explain:"İTÜ TV 1952’de deneme yayını yaptı."},
+  { q:"Yeni medyanın en belirgin farkı nedir?", options:["Tek yönlülük","Etkileşim","Yavaşlık","Sansür"], answer:1, explain:"Yeni medya etkileşimlidir."},
+  { q:"Web 1.0 için hangisi doğrudur?", options:["Etkileşim","İçerik üretimi","Pasif kullanıcı","Sosyal ağ"], answer:2, explain:"Web 1.0’da kullanıcı pasiftir."},
+  { q:"Web 2.0’ın temel özelliği nedir?", options:["Sansür","Okuma","İçerik üretimi","Yavaşlık"], answer:2, explain:"Web 2.0’da kullanıcı içerik üretir."},
+  { q:"Blog gazeteciliği neyi ifade eder?", options:["Kurumsal yayın","Kişisel içerik paylaşımı","TV haberciliği","Radyo"], answer:1, explain:"Bloglar kişisel yayınlardır."},
+  { q:"Podcast gazeteciliğinin avantajı nedir?", options:["Canlılık","Zaman kısıtı","İstenilen zamanda dinleme","Yazılı olması"], answer:2, explain:"Podcast istenilen zamanda dinlenir."},
+  { q:"Türkiye’de yayıncılığı denetleyen kurum hangisidir?", options:["RTÜK","BTK","MEB","YÖK"], answer:0, explain:"RTÜK yayın denetiminden sorumludur."},
+  { q:"Z kuşağı hangi adla anılır?", options:["Dijital göçmen","Dijital yerli","Analog","Geleneksel"], answer:1, explain:"Z kuşağı dijital yerlilerdir."},
+  { q:"Eş zamansız iletişim örneği hangisidir?", options:["Chat","Canlı yayın","E-posta","Web konferansı"], answer:2, explain:"E-posta eş zamansızdır."},
+  { q:"Etnosentrizm ne demektir?", options:["Kültürel hassasiyet","Kendi kültürünü üstün görme","Uyum","Bilgi"], answer:1, explain:"Etnosentrizm kendi kültürünü merkez almaktır."},
+  { q:"Atfedilmiş kimlik nedir?", options:["Kendi seçtiği","Başkalarının verdiği","Mesleki","Dijital"], answer:1, explain:"Atfedilmiş kimlik dışarıdan verilen kimliktir."},
+  { q:"Kültür şokunun ilk aşaması hangisidir?", options:["Kriz","Uyum","Balayı","Toparlanma"], answer:2, explain:"İlk aşama balayıdır."},
+  { q:"Yüksek bağlamlı kültürlerin özelliği hangisidir?", options:["Açık iletişim","Sözsüz iletişimin güçlü olması","Bireysellik","Kısa ilişkiler"], answer:1, explain:"Yüksek bağlamlı kültürlerde sözsüz iletişim güçlüdür."}
 ];
 
 const quizForm = document.getElementById('quiz');
-
-questions.forEach((item, index) => {
-  const div = document.createElement('div');
-  div.className = 'question';
-  div.innerHTML = `<p>${index+1}) ${item.q}</p>` + item.options.map((opt,i)=>
-    `<label><input type="radio" name="q${index}" value="${i}"> ${opt}</label><br>`
-  ).join('');
+questions.forEach((item,index)=>{
+  const div=document.createElement('div');
+  div.className='question';
+  div.innerHTML=`<p>${index+1}) ${item.q}</p>`+item.options.map((opt,i)=>`<label><input type="radio" name="q${index}" value="${i}"> ${opt}</label><br>`).join('');
   quizForm.appendChild(div);
 });
 
-function submitQuiz() {
-  let correct = 0;
-  let output = "";
-
-  questions.forEach((item, index) => {
-    const selected = document.querySelector(`input[name='q${index}']:checked`);
-    if (selected && parseInt(selected.value) === item.answer) {
-      correct++;
-    }
-    output += `<p><b>${index+1}. Soru:</b> ${item.explain}</p>`;
+function submitQuiz(){
+  let correct=0;
+  let output="";
+  questions.forEach((item,index)=>{
+    const sel=document.querySelector(`input[name='q${index}']:checked`);
+    if(sel && parseInt(sel.value)===item.answer) correct++;
+    output+=`<p><b>${index+1}. Soru:</b> ${item.explain}</p>`;
   });
-
-  const wrong = questions.length - correct;
-  document.getElementById('result').innerHTML = `
-    <h3>Sonuç</h3>
-    <p>Doğru: ${correct}</p>
-    <p>Yanlış: ${wrong}</p>
-    <hr>${output}
-  `;
+  const wrong=questions.length-correct;
+  document.getElementById('result').innerHTML=`<h3>Sonuç</h3><p>Doğru: ${correct}</p><p>Yanlış: ${wrong}</p><hr>${output}`;
 }
 </script>
 </body>
