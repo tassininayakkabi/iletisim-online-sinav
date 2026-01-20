@@ -1,102 +1,93 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8">
-  <title>İletişim – Online Deneme Sınavları</title>
-  <style>
-    body { font-family: Arial, sans-serif; background:#f4f6f8; padding:20px; }
-    .container { max-width:900px; margin:auto; background:#fff; padding:20px; border-radius:8px; }
-    h1 { text-align:center; }
-    .question { margin-bottom:20px; }
-    .question p { font-weight:bold; }
-    .result { margin-top:30px; padding:15px; background:#eef; border-radius:6px; }
-    button { padding:10px 20px; font-size:16px; cursor:pointer; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>İletişim – Online Deneme Sınavları</h1>
-    <p><b>Deneme Seç:</b> 
-      <select id="examSelect" onchange="loadExam()">
-        <option value="0">Deneme 1</option>
-        <option value="1">Deneme 2</option>
-        <option value="2">Deneme 3</option>
-        <option value="3">Deneme 4</option>
-        <option value="4">Deneme 5</option>
-        <option value="5">Deneme 6</option>
-        <option value="6">Deneme 7</option>
-      </select>
-    </p>
-    <form id="quiz"></form>
-    <button onclick="submitQuiz()">Sınavı Bitir</button>
-    <div id="result" class="result"></div>
-  </div>
+{
+  "tests": [
+    {
+      "id": 1,
+      "title": "Test 1 – Vurgulu (Kolay)",
+      "questions": [
+        {"question":"Örgüt içi iletişimin temel amacı nedir?","options":["Denetimi artırmak","Bilgi, duygu ve anlayış paylaşımı","Hiyerarşiyi güçlendirmek","Çatışma yaratmak"],"answer":1},
+        {"question":"Çalışanlar örgütle ilgili en çok neyi bilmek ister?","options":["Maaşları","Örgütün nereye gittiğini","Rakipleri","Yöneticinin kim olduğunu"],"answer":1},
+        {"question":"Dikey iletişim nedir?","options":["Aynı düzey","Üst–alt arası","Gayriresmi","Kişisel"],"answer":1},
+        {"question":"İnformal iletişim hangi özelliğe sahiptir?","options":["Planlı","Resmi","Dedikoduya açık","Yazılı"],"answer":2},
+        {"question":"Demokratik iletişimde bilgi akışı nasıldır?","options":["Tek yönlü","Karşılıklı","Gizli","Seçilmiş"],"answer":1},
 
-<script>
-// Hepsi doldurulmuş sorular – Deneme 1–7
-const allQuestions = [
-  [ // Deneme 1
-    { q:"Örgüt içi iletişimin temel amacı nedir?", options:["Denetimi artırmak","Bilgi, duygu ve anlayış paylaşımı sağlamak","Hiyerarşiyi güçlendirmek","Çatışma yaratmak"], answer:1, explain:"Örgüt içi iletişim, kurum içinde bilgi ve anlayış paylaşımını sağlar."},
-    { q:"Çalışanların en çok merak ettiği sorulardan biri hangisidir?", options:["Rakipler kim?","Örgüt ne yöne gidiyor?","Kâr oranı nedir?","Yönetici kim?"], answer:1, explain:"Çalışanlar örgütün yönünü ve hedeflerini bilmek ister."},
-    { q:"Manipülatif iletişimin temel amacı nedir?", options:["Açıklık","Propaganda","Geri bildirim","İş birliği"], answer:1, explain:"Manipülatif iletişimde bilgi seçilidir ve propaganda amaçlanır."},
-    { q:"Üstten alta ve alttan üste iletişim hangi türdür?", options:["Yatay","Çapraz","Dikey","İnformal"], answer:2, explain:"Dikey iletişim hiyerarşik yönde gerçekleşir."},
-    { q:"Dedikodu ve söylenti hangi iletişim türüdür?", options:["Formal","Dikey","İnformal","Çapraz"], answer:2, explain:"İnformal iletişim planlanmamış, söylenti temellidir."},
-    { q:"Lasswell modeli hangi türdür?", options:["Dairesel","Doğrusal","Sarmal","Etkileşimli"], answer:1, explain:"Lasswell modeli doğrusal bir modeldir."},
-    { q:"Gürültü kavramını modele ekleyen kimdir?", options:["Lasswell","DeFleur","Shannon–Weaver","Schramm"], answer:2, explain:"Shannon–Weaver modeli gürültü kavramını içerir."},
-    { q:"Geri bildirimi ekleyen model hangisidir?", options:["Lasswell","DeFleur","Dance","Newcomb"], answer:1, explain:"DeFleur modeli iletişimi çift yönlü ele alır."},
-    { q:"İletişimin zamanla geliştiğini savunan model?", options:["Dairesel","Matematiksel","Sarmal","Doğrusal"], answer:2, explain:"Dance’in Sarmal Modeli gelişimi vurgular."},
-    { q:"Kitle iletişiminde alıcılar nasıldır?", options:["Homojen","Anonim","Tanıdık","Küçük"], answer:1, explain:"Kitle iletişiminde alıcılar anonimdir."},
-    { q:"Osmanlı’da ilk resmi Türkçe gazete hangisidir?", options:["Hürriyet","Takvim-i Vekayi","Sabah","Tercüman-ı Ahval"], answer:1, explain:"Takvim-i Vekayi 1831’de yayımlanmıştır."},
-    { q:"Radyonun babası kimdir?", options:["Hertz","Bell","Marconi","Edison"], answer:2, explain:"Marconi ilk kontrollü radyo sinyalini göndermiştir."},
-    { q:"Türkiye’de ilk TV deneme yayını kim yaptı?", options:["TRT","BBC","İTÜ","CNN"], answer:2, explain:"İTÜ TV 1952’de deneme yayını yaptı."},
-    { q:"Yeni medyanın en belirgin farkı nedir?", options:["Tek yönlülük","Etkileşim","Yavaşlık","Sansür"], answer:1, explain:"Yeni medya etkileşimlidir."},
-    { q:"Web 1.0 için hangisi doğrudur?", options:["Etkileşim","İçerik üretimi","Pasif kullanıcı","Sosyal ağ"], answer:2, explain:"Web 1.0’da kullanıcı pasiftir."},
-    { q:"Web 2.0’ın temel özelliği nedir?", options:["Sansür","Okuma","İçerik üretimi","Yavaşlık"], answer:2, explain:"Web 2.0’da kullanıcı içerik üretir."},
-    { q:"Blog gazeteciliği neyi ifade eder?", options:["Kurumsal yayın","Kişisel içerik paylaşımı","TV haberciliği","Radyo"], answer:1, explain:"Bloglar kişisel yayınlardır."},
-    { q:"Podcast gazeteciliğinin avantajı nedir?", options:["Canlılık","Zaman kısıtı","İstenilen zamanda dinleme","Yazılı olması"], answer:2, explain:"Podcast istenilen zamanda dinlenir."},
-    { q:"Türkiye’de yayıncılığı denetleyen kurum hangisidir?", options:["RTÜK","BTK","MEB","YÖK"], answer:0, explain:"RTÜK yayın denetiminden sorumludur."},
-    { q:"Z kuşağı hangi adla anılır?", options:["Dijital göçmen","Dijital yerli","Analog","Geleneksel"], answer:1, explain:"Z kuşağı dijital yerlilerdir."},
-    { q:"Eş zamansız iletişim örneği hangisidir?", options:["Chat","Canlı yayın","E-posta","Web konferansı"], answer:2, explain:"E-posta eş zamansızdır."},
-    { q:"Etnosentrizm ne demektir?", options:["Kültürel hassasiyet","Kendi kültürünü üstün görme","Uyum","Bilgi"], answer:1, explain:"Etnosentrizm kendi kültürünü merkez almaktır."},
-    { q:"Atfedilmiş kimlik nedir?", options:["Kendi seçtiği","Başkalarının verdiği","Mesleki","Dijital"], answer:1, explain:"Atfedilmiş kimlik dışarıdan verilen kimliktir."},
-    { q:"Kültür şokunun ilk aşaması hangisidir?", options:["Kriz","Uyum","Balayı","Toparlanma"], answer:2, explain:"İlk aşama balayıdır."},
-    { q:"Yüksek bağlamlı kültürlerin özelliği hangisidir?", options:["Açık iletişim","Sözsüz iletişimin güçlü olması","Bireysellik","Kısa ilişkiler"], answer:1, explain:"Yüksek bağlamlı kültürlerde sözsüz iletişim güçlüdür."}
-  ],
-  [ /* Deneme 2 soruları */ ],
-  [ /* Deneme 3 soruları */ ],
-  [ /* Deneme 4 soruları */ ],
-  [ /* Deneme 5 soruları */ ],
-  [ /* Deneme 6 soruları */ ],
-  [ /* Deneme 7 soruları */ ]
-];
+        {"question":"Manipülatif iletişimin amacı nedir?","options":["Şeffaflık","Propaganda","Katılım","Geri bildirim"],"answer":1},
+        {"question":"Yatay iletişim kimler arasında olur?","options":["Üst–alt","Aynı statü","Yönetici–çalışan","Kurum–kamu"],"answer":1},
+        {"question":"Orantısız iletişim neyi ifade eder?","options":["Tam açıklık","Geri bildirim eksikliği","Serbest iletişim","Çift yönlülük"],"answer":1},
+        {"question":"Örgüt içi iletişim motivasyonu nasıl etkiler?","options":["Azaltır","Artırır","Etkilemez","Engeller"],"answer":1},
+        {"question":"İletişim engellerinden biri nedir?","options":["Geri bildirim","Güvensizlik","Açıklık","Uyum"],"answer":1},
 
-const quizForm = document.getElementById('quiz');
+        {"question":"Kültürel farklılıklar iletişimi nasıl etkiler?","options":["Etkilemez","Zorlaştırabilir","Kolaylaştırır","Standartlaştırır"],"answer":1},
+        {"question":"Açık sistem anlayışı neyi savunur?","options":["Dışa kapalı","Çevreyle etkileşim","Sabit yapı","Değişmezlik"],"answer":1},
+        {"question":"Bürokratik iletişimde bilgi nasıldır?","options":["Serbest","Sınırlı","Yoğun","Düzensiz"],"answer":1},
+        {"question":"Biçimsel iletişim hangi çerçevede olur?","options":["Kişisel","Kurumsal","Rastgele","Sözlü"],"answer":1},
+        {"question":"İletişimde gürültü neyi ifade eder?","options":["Mesaj","Engel","Kanal","Alıcı"],"answer":1},
 
-function loadExam() {
-  quizForm.innerHTML = '';
-  const examIndex = document.getElementById('examSelect').value;
-  allQuestions[examIndex].forEach((item,index)=>{
-    const div=document.createElement('div');
-    div.className='question';
-    div.innerHTML=`<p>${index+1}) ${item.q}</p>` + item.options.map((opt,i)=>`<label><input type="radio" name="q${index}" value="${i}"> ${opt}</label><br>`).join('');
-    quizForm.appendChild(div);
-  });
+        {"question":"Örgütsel bağlılık neyle artar?","options":["Bilgi gizleme","Etkili iletişim","Denetim","Ceza"],"answer":1},
+        {"question":"Geri bildirim ne sağlar?","options":["Tek yön","Anlaşılma","Gizlilik","Hiyerarşi"],"answer":1},
+        {"question":"İletişim sürecinin ilk öğesi nedir?","options":["Kanal","Kaynak","Alıcı","Gürültü"],"answer":1},
+        {"question":"İletişim sürecinde mesaj nedir?","options":["Anlam","İleti","Kanal","Tepki"],"answer":1},
+        {"question":"İletişimde kodlama ne demektir?","options":["Mesajı çözme","Mesajı oluşturma","Mesajı silme","Mesajı gizleme"],"answer":1},
+
+        {"question":"Örgüt içi iletişim karar sürecini nasıl etkiler?","options":["Zayıflatır","Güçlendirir","Yavaşlatır","Engeller"],"answer":1},
+        {"question":"İletişimde empati ne sağlar?","options":["Çatışma","Anlayış","Denetim","Mesafe"],"answer":1},
+        {"question":"İletişim başarısı neye bağlıdır?","options":["Tek yön","Anlamın paylaşılması","Gürültü","Hız"],"answer":1},
+        {"question":"Örgütsel iletişim hangi düzeyde olur?","options":["Sadece bireysel","Bireysel ve grup","Sadece yönetim","Sadece yazılı"],"answer":1}
+      ]
+    },
+
+    {
+      "id": 2,
+      "title": "Test 2 – Vurgulu (Orta)",
+      "questions": [
+        {"question":"Lasswell modeli hangi türdür?","options":["Dairesel","Doğrusal","Etkileşimli","Sarmal"],"answer":1},
+        {"question":"Geri bildirimi modele ekleyen kimdir?","options":["Lasswell","DeFleur","Shannon","Dance"],"answer":1}
+        /* … aynı formatta 25 soru devam eder */
+      ]
+    },
+
+    {
+      "id": 3,
+      "title": "Test 3 – Vurgulu (Zor)",
+      "questions": [
+        {"question":"Dance Sarmal Modeli neyi vurgular?","options":["Tek yön","Zamanla gelişim","Gürültü","Kontrol"],"answer":1}
+        /* 25 soru */
+      ]
+    },
+
+    {
+      "id": 4,
+      "title": "Test 4 – Vurgulu (Çok Zor)",
+      "questions": [
+        {"question":"Yüksek bağlamlı kültürlerin özelliği nedir?","options":["Açık dil","Sözsüz iletişim","Bireysellik","Netlik"],"answer":1}
+        /* 25 soru */
+      ]
+    },
+
+    {
+      "id": 5,
+      "title": "Test 5 – Vurgusuz (Kolay)",
+      "questions": [
+        {"question":"Kitle iletişiminde alıcılar nasıldır?","options":["Homojen","Anonim","Tanıdık","Az"],"answer":1}
+        /* 25 soru */
+      ]
+    },
+
+    {
+      "id": 6,
+      "title": "Test 6 – Vurgusuz (Orta)",
+      "questions": [
+        {"question":"Web 2.0’ın temel özelliği nedir?","options":["Pasiflik","Etkileşim","Sansür","Yavaşlık"],"answer":1}
+        /* 25 soru */
+      ]
+    },
+
+    {
+      "id": 7,
+      "title": "Test 7 – Vurgusuz (Zor)",
+      "questions": [
+        {"question":"Z kuşağı hangi adla anılır?","options":["Dijital göçmen","Dijital yerli","Analog","Geleneksel"],"answer":1}
+        /* 25 soru */
+      ]
+    }
+  ]
 }
-
-loadExam();
-
-function submitQuiz(){
-  const examIndex = document.getElementById('examSelect').value;
-  let correct=0;
-  let output="";
-  allQuestions[examIndex].forEach((item,index)=>{
-    const sel=document.querySelector(`input[name='q${index}']:checked`);
-    if(sel && parseInt(sel.value)===item.answer) correct++;
-    output+=`<p><b>${index+1}. Soru:</b> ${item.explain}</p>`;
-  });
-  const wrong=allQuestions[examIndex].length - correct;
-  document.getElementById('result').innerHTML = `<h3>Sonuç</h3><p>Doğru: ${correct}</p><p>Yanlış: ${wrong}</p><hr>${output}`;
-}
-</script>
-</body>
-</html>
