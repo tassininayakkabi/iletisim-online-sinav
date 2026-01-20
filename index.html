@@ -15,60 +15,94 @@
 </head>
 <body>
   <div class="container">
-    <h1>İletişim – 25 Soruluk Online Deneme Sınavı</h1>
+    <h1>İletişim – Online Deneme Sınavları</h1>
+    <p><b>Deneme Seç:</b> 
+      <select id="examSelect" onchange="loadExam()">
+        <option value="0">Deneme 1</option>
+        <option value="1">Deneme 2</option>
+        <option value="2">Deneme 3</option>
+      </select>
+    </p>
     <form id="quiz"></form>
     <button onclick="submitQuiz()">Sınavı Bitir</button>
     <div id="result" class="result"></div>
   </div>
 
 <script>
-const questions = [
-  { q:"Örgüt içi iletişimin temel amacı nedir?", options:["Denetimi artırmak","Bilgi, duygu ve anlayış paylaşımı sağlamak","Hiyerarşiyi güçlendirmek","Çatışma yaratmak"], answer:1, explain:"Örgüt içi iletişim, kurum içinde bilgi ve anlayış paylaşımını sağlar."},
-  { q:"Çalışanların en çok merak ettiği sorulardan biri hangisidir?", options:["Rakipler kim?","Örgüt ne yöne gidiyor?","Kâr oranı nedir?","Yönetici kim?"], answer:1, explain:"Çalışanlar örgütün yönünü ve hedeflerini bilmek ister."},
-  { q:"Manipülatif iletişimin temel amacı nedir?", options:["Açıklık","Propaganda","Geri bildirim","İş birliği"], answer:1, explain:"Manipülatif iletişimde bilgi seçilidir ve propaganda amaçlanır."},
-  { q:"Üstten alta ve alttan üste iletişim hangi türdür?", options:["Yatay","Çapraz","Dikey","İnformal"], answer:2, explain:"Dikey iletişim hiyerarşik yönde gerçekleşir."},
-  { q:"Dedikodu ve söylenti hangi iletişim türüdür?", options:["Formal","Dikey","İnformal","Çapraz"], answer:2, explain:"İnformal iletişim planlanmamış, söylenti temellidir."},
-  { q:"Lasswell modeli hangi türdür?", options:["Dairesel","Doğrusal","Sarmal","Etkileşimli"], answer:1, explain:"Lasswell modeli doğrusal bir modeldir."},
-  { q:"Gürültü kavramını modele ekleyen kimdir?", options:["Lasswell","DeFleur","Shannon–Weaver","Schramm"], answer:2, explain:"Shannon–Weaver modeli gürültü kavramını içerir."},
-  { q:"Geri bildirimi ekleyen model hangisidir?", options:["Lasswell","DeFleur","Dance","Newcomb"], answer:1, explain:"DeFleur modeli iletişimi çift yönlü ele alır."},
-  { q:"İletişimin zamanla geliştiğini savunan model?", options:["Dairesel","Matematiksel","Sarmal","Doğrusal"], answer:2, explain:"Dance’in Sarmal Modeli gelişimi vurgular."},
-  { q:"Kitle iletişiminde alıcılar nasıldır?", options:["Homojen","Anonim","Tanıdık","Küçük"], answer:1, explain:"Kitle iletişiminde alıcılar anonimdir."},
-  { q:"Osmanlı’da ilk resmi Türkçe gazete hangisidir?", options:["Hürriyet","Takvim-i Vekayi","Sabah","Tercüman-ı Ahval"], answer:1, explain:"Takvim-i Vekayi 1831’de yayımlanmıştır."},
-  { q:"Radyonun babası kimdir?", options:["Hertz","Bell","Marconi","Edison"], answer:2, explain:"Marconi ilk kontrollü radyo sinyalini göndermiştir."},
-  { q:"Türkiye’de ilk TV deneme yayını kim yaptı?", options:["TRT","BBC","İTÜ","CNN"], answer:2, explain:"İTÜ TV 1952’de deneme yayını yaptı."},
-  { q:"Yeni medyanın en belirgin farkı nedir?", options:["Tek yönlülük","Etkileşim","Yavaşlık","Sansür"], answer:1, explain:"Yeni medya etkileşimlidir."},
-  { q:"Web 1.0 için hangisi doğrudur?", options:["Etkileşim","İçerik üretimi","Pasif kullanıcı","Sosyal ağ"], answer:2, explain:"Web 1.0’da kullanıcı pasiftir."},
-  { q:"Web 2.0’ın temel özelliği nedir?", options:["Sansür","Okuma","İçerik üretimi","Yavaşlık"], answer:2, explain:"Web 2.0’da kullanıcı içerik üretir."},
-  { q:"Blog gazeteciliği neyi ifade eder?", options:["Kurumsal yayın","Kişisel içerik paylaşımı","TV haberciliği","Radyo"], answer:1, explain:"Bloglar kişisel yayınlardır."},
-  { q:"Podcast gazeteciliğinin avantajı nedir?", options:["Canlılık","Zaman kısıtı","İstenilen zamanda dinleme","Yazılı olması"], answer:2, explain:"Podcast istenilen zamanda dinlenir."},
-  { q:"Türkiye’de yayıncılığı denetleyen kurum hangisidir?", options:["RTÜK","BTK","MEB","YÖK"], answer:0, explain:"RTÜK yayın denetiminden sorumludur."},
-  { q:"Z kuşağı hangi adla anılır?", options:["Dijital göçmen","Dijital yerli","Analog","Geleneksel"], answer:1, explain:"Z kuşağı dijital yerlilerdir."},
-  { q:"Eş zamansız iletişim örneği hangisidir?", options:["Chat","Canlı yayın","E-posta","Web konferansı"], answer:2, explain:"E-posta eş zamansızdır."},
-  { q:"Etnosentrizm ne demektir?", options:["Kültürel hassasiyet","Kendi kültürünü üstün görme","Uyum","Bilgi"], answer:1, explain:"Etnosentrizm kendi kültürünü merkez almaktır."},
-  { q:"Atfedilmiş kimlik nedir?", options:["Kendi seçtiği","Başkalarının verdiği","Mesleki","Dijital"], answer:1, explain:"Atfedilmiş kimlik dışarıdan verilen kimliktir."},
-  { q:"Kültür şokunun ilk aşaması hangisidir?", options:["Kriz","Uyum","Balayı","Toparlanma"], answer:2, explain:"İlk aşama balayıdır."},
-  { q:"Yüksek bağlamlı kültürlerin özelliği hangisidir?", options:["Açık iletişim","Sözsüz iletişimin güçlü olması","Bireysellik","Kısa ilişkiler"], answer:1, explain:"Yüksek bağlamlı kültürlerde sözsüz iletişim güçlüdür."}
-];
-
-const quizForm = document.getElementById('quiz');
-questions.forEach((item,index)=>{
-  const div=document.createElement('div');
-  div.className='question';
-  div.innerHTML=`<p>${index+1}) ${item.q}</p>`+item.options.map((opt,i)=>`<label><input type="radio" name="q${index}" value="${i}"> ${opt}</label><br>`).join('');
-  quizForm.appendChild(div);
-});
-
-function submitQuiz(){
-  let correct=0;
-  let output="";
-  questions.forEach((item,index)=>{
-    const sel=document.querySelector(`input[name='q${index}']:checked`);
-    if(sel && parseInt(sel.value)===item.answer) correct++;
-    output+=`<p><b>${index+1}. Soru:</b> ${item.explain}</p>`;
-  });
-  const wrong=questions.length-correct;
-  document.getElementById('result').innerHTML=`<h3>Sonuç</h3><p>Doğru: ${correct}</p><p>Yanlış: ${wrong}</p><hr>${output}`;
-}
-</script>
-</body>
-</html>
+// Sorular Denemelere göre
+const allQuestions = [
+  [ // Deneme 1
+    { q:"Örgüt içi iletişimin temel amacı nedir?", options:["Denetimi artırmak","Bilgi, duygu ve anlayış paylaşımı sağlamak","Hiyerarşiyi güçlendirmek","Çatışma yaratmak"], answer:1, explain:"Örgüt içi iletişim, kurum içinde bilgi ve anlayış paylaşımını sağlar."},
+    { q:"Çalışanların en çok merak ettiği sorulardan biri hangisidir?", options:["Rakipler kim?","Örgüt ne yöne gidiyor?","Kâr oranı nedir?","Yönetici kim?"], answer:1, explain:"Çalışanlar örgütün yönünü ve hedeflerini bilmek ister."},
+    { q:"Manipülatif iletişimin temel amacı nedir?", options:["Açıklık","Propaganda","Geri bildirim","İş birliği"], answer:1, explain:"Manipülatif iletişimde bilgi seçilidir ve propaganda amaçlanır."},
+    { q:"Üstten alta ve alttan üste iletişim hangi türdür?", options:["Yatay","Çapraz","Dikey","İnformal"], answer:2, explain:"Dikey iletişim hiyerarşik yönde gerçekleşir."},
+    { q:"Dedikodu ve söylenti hangi iletişim türüdür?", options:["Formal","Dikey","İnformal","Çapraz"], answer:2, explain:"İnformal iletişim planlanmamış, söylenti temellidir."},
+    { q:"Lasswell modeli hangi türdür?", options:["Dairesel","Doğrusal","Sarmal","Etkileşimli"], answer:1, explain:"Lasswell modeli doğrusal bir modeldir."},
+    { q:"Gürültü kavramını modele ekleyen kimdir?", options:["Lasswell","DeFleur","Shannon–Weaver","Schramm"], answer:2, explain:"Shannon–Weaver modeli gürültü kavramını içerir."},
+    { q:"Geri bildirimi ekleyen model hangisidir?", options:["Lasswell","DeFleur","Dance","Newcomb"], answer:1, explain:"DeFleur modeli iletişimi çift yönlü ele alır."},
+    { q:"İletişimin zamanla geliştiğini savunan model?", options:["Dairesel","Matematiksel","Sarmal","Doğrusal"], answer:2, explain:"Dance’in Sarmal Modeli gelişimi vurgular."},
+    { q:"Kitle iletişiminde alıcılar nasıldır?", options:["Homojen","Anonim","Tanıdık","Küçük"], answer:1, explain:"Kitle iletişiminde alıcılar anonimdir."},
+    { q:"Osmanlı’da ilk resmi Türkçe gazete hangisidir?", options:["Hürriyet","Takvim-i Vekayi","Sabah","Tercüman-ı Ahval"], answer:1, explain:"Takvim-i Vekayi 1831’de yayımlanmıştır."},
+    { q:"Radyonun babası kimdir?", options:["Hertz","Bell","Marconi","Edison"], answer:2, explain:"Marconi ilk kontrollü radyo sinyalini göndermiştir."},
+    { q:"Türkiye’de ilk TV deneme yayını kim yaptı?", options:["TRT","BBC","İTÜ","CNN"], answer:2, explain:"İTÜ TV 1952’de deneme yayını yaptı."},
+    { q:"Yeni medyanın en belirgin farkı nedir?", options:["Tek yönlülük","Etkileşim","Yavaşlık","Sansür"], answer:1, explain:"Yeni medya etkileşimlidir."},
+    { q:"Web 1.0 için hangisi doğrudur?", options:["Etkileşim","İçerik üretimi","Pasif kullanıcı","Sosyal ağ"], answer:2, explain:"Web 1.0’da kullanıcı pasiftir."},
+    { q:"Web 2.0’ın temel özelliği nedir?", options:["Sansür","Okuma","İçerik üretimi","Yavaşlık"], answer:2, explain:"Web 2.0’da kullanıcı içerik üretir."},
+    { q:"Blog gazeteciliği neyi ifade eder?", options:["Kurumsal yayın","Kişisel içerik paylaşımı","TV haberciliği","Radyo"], answer:1, explain:"Bloglar kişisel yayınlardır."},
+    { q:"Podcast gazeteciliğinin avantajı nedir?", options:["Canlılık","Zaman kısıtı","İstenilen zamanda dinleme","Yazılı olması"], answer:2, explain:"Podcast istenilen zamanda dinlenir."},
+    { q:"Türkiye’de yayıncılığı denetleyen kurum hangisidir?", options:["RTÜK","BTK","MEB","YÖK"], answer:0, explain:"RTÜK yayın denetiminden sorumludur."},
+    { q:"Z kuşağı hangi adla anılır?", options:["Dijital göçmen","Dijital yerli","Analog","Geleneksel"], answer:1, explain:"Z kuşağı dijital yerlilerdir."},
+    { q:"Eş zamansız iletişim örneği hangisidir?", options:["Chat","Canlı yayın","E-posta","Web konferansı"], answer:2, explain:"E-posta eş zamansızdır."},
+    { q:"Etnosentrizm ne demektir?", options:["Kültürel hassasiyet","Kendi kültürünü üstün görme","Uyum","Bilgi"], answer:1, explain:"Etnosentrizm kendi kültürünü merkez almaktır."},
+    { q:"Atfedilmiş kimlik nedir?", options:["Kendi seçtiği","Başkalarının verdiği","Mesleki","Dijital"], answer:1, explain:"Atfedilmiş kimlik dışarıdan verilen kimliktir."},
+    { q:"Kültür şokunun ilk aşaması hangisidir?", options:["Kriz","Uyum","Balayı","Toparlanma"], answer:2, explain:"İlk aşama balayıdır."},
+    { q:"Yüksek bağlamlı kültürlerin özelliği hangisidir?", options:["Açık iletişim","Sözsüz iletişimin güçlü olması","Bireysellik","Kısa ilişkiler"], answer:1, explain:"Yüksek bağlamlı kültürlerde sözsüz iletişim güçlüdür."}
+  ],
+  [ // Deneme 2 (farklı sorular, aynı konular)
+    { q:"İletişimde en kritik engel nedir?", options:["Dil bariyeri","Zaman","Gürültü","Mesafe"], answer:2, explain:"Gürültü mesajın iletimini etkileyebilir."},
+    { q:"Çalışanların motivasyonu için hangi iletişim önemlidir?", options:["Formal","İnformal","Dikey","Çapraz"], answer:1, explain:"İnformal iletişim moral ve motivasyonu artırır."},
+    { q:"Propagandanın amacı nedir?", options:["Eğitim","Bilgi paylaşımı","İkna","Öneri"], answer:2, explain:"Propaganda ikna etmeye yöneliktir."},
+    { q:"Yatay iletişim örneği hangisidir?", options:["Departmanlar arası bilgi paylaşımı","Yönetici-çalışan konuşması","Dış paydaşlarla yazışma","Söylenti"], answer:0, explain:"Departmanlar arası iletişim yataydır."},
+    { q:"Planlanmamış iletişim türü nedir?", options:["Formal","İnformal","Dikey","Çapraz"], answer:1, explain:"İnformal iletişim planlanmamıştır."},
+    { q:"Doğrusal model örneği hangisidir?", options:["Shannon–Weaver","Dance","DeFleur","Newcomb"], answer:0, explain:"Shannon–Weaver doğrusal modeldir."},
+    { q:"Çift yönlü iletişim modeli hangisidir?", options:["DeFleur","Lasswell","Shannon–Weaver","Schramm"], answer:0, explain:"DeFleur modeli geri bildirimi içerir."},
+    { q:"Sarmal model hangi kavramı vurgular?", options:["Gelişim","Hata","Kitle","İzleyici"], answer:0, explain:"Dance’in sarmal modeli iletişimin gelişimini vurgular."},
+    { q:"Kitle iletişiminde hedef kitlenin niteliği nasıldır?", options:["Tanıdık","Homojen","Bireysel","Dar"], answer:1, explain:"Kitle iletişiminde alıcılar genellikle homojendir."},
+    { q:"1831’de yayımlanan gazete hangisidir?", options:["Tercüman-ı Ahval","Takvim-i Vekayi","Sabah","Hürriyet"], answer:1, explain:"Takvim-i Vekayi Osmanlı’nın ilk resmi Türkçe gazetesidir."},
+    { q:"Radyo sinyalini ilk gönderen kişi?", options:["Edison","Marconi","Hertz","Bell"], answer:1, explain:"Marconi kontrollü radyo sinyali gönderdi."},
+    { q:"İTÜ TV deneme yayını yılı?", options:["1949","1952","1960","1955"], answer:1, explain:"İTÜ 1952’de TV deneme yayını yaptı."},
+    { q:"Yeni medyada kullanıcı rolü nedir?", options:["Pasif","Etkileşimli","Yasaklı","Gözetimli"], answer:1, explain:"Yeni medyada kullanıcı etkileşimlidir."},
+    { q:"Web 1.0 kullanıcı tipi?", options:["Aktif","Pasif","Üretici","Katılımcı"], answer:1, explain:"Web 1.0’da kullanıcı pasifti."},
+    { q:"Web 2.0 farkı nedir?", options:["İçerik üretir","İçerik tüketir","Sosyal değil","Yavaş"], answer:0, explain:"Web 2.0’da kullanıcı içerik üretir."},
+    { q:"Bloglar neyi temsil eder?", options:["Kişisel içerik","Kurum içi","Gazete","Radyo"], answer:0, explain:"Bloglar kişisel içeriktir."},
+    { q:"Podcast avantajı?", options:["Yazılı","Zaman esnek","Sabit","Canlı"], answer:1, explain:"Podcast istenilen zamanda dinlenebilir."},
+    { q:"Yayın denetiminden sorumlu?", options:["RTÜK","MEB","BTK","YÖK"], answer:0, explain:"RTÜK yayınları denetler."},
+    { q:"Z kuşağı kimdir?", options:["Dijital göçmen","Dijital yerli","Analog","Geleneksel"], answer:1, explain:"Z kuşağı dijital yerlidir."},
+    { q:"Asenkron iletişim örneği?", options:["Chat","E-posta","Canlı yayın","Web konferans"], answer:1, explain:"E-posta eş zamanlı değildir."},
+    { q:"Etnosentrizm nedir?", options:["Uyum","Kendi kültürünü üstün görme","Hassasiyet","Bilgi"], answer:1, explain:"Etnosentrizm kendi kültürünü merkez almaktır."},
+    { q:"Başkalarının verdiği kimlik nedir?", options:["Seçilen","Atfedilmiş","Mesleki","Dijital"], answer:1, explain:"Atfedilmiş kimlik dışarıdan verilen kimliktir."},
+    { q:"Kültür şokunun ilk aşaması?", options:["Balayı","Kriz","Uyum","Toparlanma"], answer:0, explain:"İlk aşama balayıdır."},
+    { q:"Yüksek bağlam kültürlerde iletişim?", options:["Sözsüz güçlü","Açık","Kısa","Bireysel"], answer:0, explain:"Yüksek bağlam kültürlerde sözsüz iletişim güçlüdür."}
+  ],
+  [ // Deneme 3 (farklı sorular, aynı konular)
+    { q:"İletişim sürecinde gürültü neyi etkiler?", options:["Mesajın iletimi","Alıcının sayısı","Kanalın hızı","İçerik türü"], answer:0, explain:"Gürültü mesajın iletimini zorlaştırır."},
+    { q:"Motivasyonu artıran iletişim türü?", options:["Formal","Dikey","İnformal","Çapraz"], answer:2, explain:"İnformal iletişim moral ve motivasyonu artırır."},
+    { q:"Bilgi seçiciliği ile yapılan iletişim?", options:["Açık","Propagandif","Öneri","Geri bildirim"], answer:1, explain:"Propaganda bilgi seçici ve ikna amaçlıdır."},
+    { q:"Departmanlar arası iletişim türü?", options:["Yatay","Dikey","Çapraz","İnformal"], answer:0, explain:"Departmanlar arası iletişim yataydır."},
+    { q:"Söylenti iletişim türü?", options:["Formal","Dikey","İnformal","Çapraz"], answer:2, explain:"Dedikodu/informal iletişimdir."},
+    { q:"Doğrusal model hangisidir?", options:["Shannon–Weaver","DeFleur","Dance","Newcomb"], answer:0, explain:"Shannon–Weaver doğrusal modeldir."},
+    { q:"Geri bildirim içeren model?", options:["DeFleur","Lasswell","Shannon–Weaver","Schramm"], answer:0, explain:"DeFleur modeli çift yönlüdür."},
+    { q:"İletişimin gelişim modelini kim önerdi?", options:["Dance","Lasswell","Shannon–Weaver","DeFleur"], answer:0, explain:"Dance sarmal modeli geliştirdi."},
+    { q:"Kitle iletişiminde alıcı tipi?", options:["Homojen","Bireysel","Tanıdık","Sınırlı"], answer:0, explain:"Kitle iletişiminde alıcılar homojendir."},
+    { q:"Osmanlı ilk resmi gazete?", options:["Takvim-i Vekayi","Sabah","Tercüman-ı Ahval","Hürriyet"], answer:0, explain:"Takvim-i Vekayi resmi gazetedir."},
+    { q:"Radyo öncüsü kimdir?", options:["Marconi","Hertz","Bell","Edison"], answer:0, explain:"Marconi radyoyu geliştirdi."},
+    { q:"Türkiye ilk TV deneme yayını?", options:["İTÜ","TRT","BBC","CNN"], answer:0, explain:"İTÜ 1952’de yaptı."},
+    { q:"Yeni medyanın farkı?", options:["Etkileşim","Pasiflik","Yavaşlık","Sansür"], answer:0, explain:"Yeni medya etkileşimlidir."},
+    { q:"Web 1.0 kullanıcı tipi?", options:["Pasif","Aktif","Üretici","Katılımcı"], answer:0, explain:"Web 1.0’da kullanıcı pasiftir."},
+    { q:"Web 2.0 temel özelliği?", options:["İçerik üretimi","Sansür","Okuma","Yavaşlık"], answer:0, explain:"Web 2.0’da içerik üretimi vardır."},
+    { q:"Blog neyi temsil eder?", options:["Kişisel içerik","Gazete","Radyo","Kurumsal"], answer:0, explain:"Bloglar kişisel içeriktir."},
+    { q:"Podcast avantajı?", options:["İstenilen zamanda dinleme","Canlı","Yazılı","Zorunlu"], answer:0, explain:"Podcast zamanı esnek dinlenir."},
+    { q:"Yayın denetim kurumu?", options:["RTÜK","BTK","MEB","YÖK"], answer:0, explain:"RTÜK denetler."},
+    { q:"Z kuşağı kimdir?", options:["Dijital yerli","Analog","Geleneksel","Dijital göçmen"], answer:0, explain:"Z kuşağı dijital yerlidir."},
+    { q:"Eş zamansız iletişim örneği?", options:["E-posta","Chat","Web konferans","Canlı yayın"], answer:0, explain:"E-posta eş zamansızdır."},
+    { q:"Etnosentrizm nedir?", options:["Kendi kültürünü üstün
